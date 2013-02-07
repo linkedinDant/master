@@ -26,11 +26,6 @@ struct request {
 };
 typedef struct request request;
 
-struct response {
-	char *resp;
-};
-typedef struct response response;
-
 #define SERVER 0x2fffffff
 #define SERVER_V1 1
 
@@ -39,14 +34,17 @@ typedef struct response response;
 extern  int * sum_1(int *, CLIENT *);
 extern  int * sum_1_svc(int *, struct svc_req *);
 #define print_message 2
-extern  void * print_message_1(struct message *, CLIENT *);
-extern  void * print_message_1_svc(struct message *, struct svc_req *);
+extern  int * print_message_1(struct message *, CLIENT *);
+extern  int * print_message_1_svc(struct message *, struct svc_req *);
 #define concat 3
-extern  struct response * concat_1(struct request *, CLIENT *);
-extern  struct response * concat_1_svc(struct request *, struct svc_req *);
+extern  char ** concat_1(struct request *, CLIENT *);
+extern  char ** concat_1_svc(struct request *, struct svc_req *);
 #define increment 4
-extern  void * increment_1(void *, CLIENT *);
-extern  void * increment_1_svc(void *, struct svc_req *);
+extern  int * increment_1(void *, CLIENT *);
+extern  int * increment_1_svc(void *, struct svc_req *);
+#define get 5
+extern  int * get_1(void *, CLIENT *);
+extern  int * get_1_svc(void *, struct svc_req *);
 extern int server_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
 #else /* K&R C */
@@ -54,14 +52,17 @@ extern int server_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 extern  int * sum_1();
 extern  int * sum_1_svc();
 #define print_message 2
-extern  void * print_message_1();
-extern  void * print_message_1_svc();
+extern  int * print_message_1();
+extern  int * print_message_1_svc();
 #define concat 3
-extern  struct response * concat_1();
-extern  struct response * concat_1_svc();
+extern  char ** concat_1();
+extern  char ** concat_1_svc();
 #define increment 4
-extern  void * increment_1();
-extern  void * increment_1_svc();
+extern  int * increment_1();
+extern  int * increment_1_svc();
+#define get 5
+extern  int * get_1();
+extern  int * get_1_svc();
 extern int server_1_freeresult ();
 #endif /* K&R C */
 
@@ -70,12 +71,10 @@ extern int server_1_freeresult ();
 #if defined(__STDC__) || defined(__cplusplus)
 extern  bool_t xdr_message (XDR *, message*);
 extern  bool_t xdr_request (XDR *, request*);
-extern  bool_t xdr_response (XDR *, response*);
 
 #else /* K&R C */
 extern bool_t xdr_message ();
 extern bool_t xdr_request ();
-extern bool_t xdr_response ();
 
 #endif /* K&R C */
 

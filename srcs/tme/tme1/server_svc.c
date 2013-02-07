@@ -41,20 +41,26 @@ server_1(struct svc_req *rqstp, register SVCXPRT *transp)
 
 	case print_message:
 		_xdr_argument = (xdrproc_t) xdr_message;
-		_xdr_result = (xdrproc_t) xdr_void;
+		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) print_message_1_svc;
 		break;
 
 	case concat:
 		_xdr_argument = (xdrproc_t) xdr_request;
-		_xdr_result = (xdrproc_t) xdr_response;
+		_xdr_result = (xdrproc_t) xdr_wrapstring;
 		local = (char *(*)(char *, struct svc_req *)) concat_1_svc;
 		break;
 
 	case increment:
 		_xdr_argument = (xdrproc_t) xdr_void;
-		_xdr_result = (xdrproc_t) xdr_void;
+		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) increment_1_svc;
+		break;
+
+	case get:
+		_xdr_argument = (xdrproc_t) xdr_void;
+		_xdr_result = (xdrproc_t) xdr_int;
+		local = (char *(*)(char *, struct svc_req *)) get_1_svc;
 		break;
 
 	default:

@@ -5,46 +5,54 @@
  */
 
 #include "server.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-int cpt = 0;
+static int cpt = 0;
 
 int *
 sum_1_svc(int *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	result = (*argp);
-	// On incrémente
-	++result;
+	result *= 2;
+
 	return &result;
 }
 
-void *
+int *
 print_message_1_svc(struct message *argp, struct svc_req *rqstp)
 {
-	static char * result;
-	printf("%d - %s\n", argp->code, argp->message);
-	return (void *) &result;
-}
+	static int  result;
 
-struct response *
-concat_1_svc(struct request *argp, struct svc_req *rqstp)
-{
-	static struct response  result;
-
-	result.resp = malloc(sizeof(argp->first) + sizeof(argp->second));
-	strcat(result.resp, argp->first);
-	strcat(result.resp, argp->second);
+  printf("%d - %s\n", argp->code, argp->message);
+  result = 0;
 	return &result;
 }
 
-void *
-increment_1_svc(void *argp, struct svc_req *rqstp)
+char **
+concat_1_svc(struct request *argp, struct svc_req *rqstp)
 {
 	static char * result;
+  result = malloc(sizeof(argp->first) + sizeof(argp->second));
+  strcat(result, argp->first);
+  strcat(result, argp->second);
+	return &result;
+}
 
-	++cpt;
-	return (void *) &cpt;
+int *
+increment_1_svc(void *argp, struct svc_req *rqstp)
+{
+	static int  result;
+  ++cpt;
+  result = cpt;
+	return &result;
+}
+
+int *
+get_1_svc(void *argp, struct svc_req *rqstp)
+{
+	static int  result;
+
+  result = cpt;
+
+	return &result;
 }

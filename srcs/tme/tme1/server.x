@@ -4,19 +4,16 @@ struct message {
 };
 
 struct request {
-  char* first;
-  char* second;
-};
-
-struct response {
-  char* resp;
+  string first<255>;
+  string second<255>;
 };
 
 program SERVER {
 	version SERVER_V1 {
 		int sum(int) = 1;
-		void print_message(struct message) = 2;
-		struct response concat(struct request) = 3;
-		void increment() = 4;
+		int print_message(struct message) = 2;
+		string concat(struct request) = 3;
+		int increment(void) = 4;
+		int get(void) = 5;
 	} = 1;
 } = 0x2fffffff;

@@ -13,12 +13,14 @@ server_1(char *host)
 	CLIENT *clnt;
 	int  *result_1;
 	int  sum_1_arg;
-	void  *result_2;
+	int  *result_2;
 	struct message  print_message_1_arg;
-	struct response  *result_3;
+	char * *result_3;
 	struct request  concat_1_arg;
-	void  *result_4;
+	int  *result_4;
 	char *increment_1_arg;
+	int  *result_5;
+	char *get_1_arg;
 
 #ifndef	DEBUG
 	clnt = clnt_create (host, SERVER, SERVER_V1, "udp");
@@ -33,15 +35,19 @@ server_1(char *host)
 		clnt_perror (clnt, "call failed");
 	}
 	result_2 = print_message_1(&print_message_1_arg, clnt);
-	if (result_2 == (void *) NULL) {
+	if (result_2 == (int *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
 	result_3 = concat_1(&concat_1_arg, clnt);
-	if (result_3 == (struct response *) NULL) {
+	if (result_3 == (char **) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
 	result_4 = increment_1((void*)&increment_1_arg, clnt);
-	if (result_4 == (void *) NULL) {
+	if (result_4 == (int *) NULL) {
+		clnt_perror (clnt, "call failed");
+	}
+	result_5 = get_1((void*)&get_1_arg, clnt);
+	if (result_5 == (int *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
 #ifndef	DEBUG

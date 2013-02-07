@@ -22,19 +22,9 @@ xdr_request (XDR *xdrs, request *objp)
 {
 	register int32_t *buf;
 
-	 if (!xdr_pointer (xdrs, (char **)&objp->first, sizeof (char), (xdrproc_t) xdr_char))
+	 if (!xdr_string (xdrs, &objp->first, 255))
 		 return FALSE;
-	 if (!xdr_pointer (xdrs, (char **)&objp->second, sizeof (char), (xdrproc_t) xdr_char))
-		 return FALSE;
-	return TRUE;
-}
-
-bool_t
-xdr_response (XDR *xdrs, response *objp)
-{
-	register int32_t *buf;
-
-	 if (!xdr_pointer (xdrs, (char **)&objp->resp, sizeof (char), (xdrproc_t) xdr_char))
+	 if (!xdr_string (xdrs, &objp->second, 255))
 		 return FALSE;
 	return TRUE;
 }
