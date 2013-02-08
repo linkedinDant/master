@@ -13,6 +13,7 @@ server_1(char *host)
 	CLIENT *clnt;
 	int  *result_1;
 	int  sum_1_arg;
+	
 	int  *result_2;
 	struct message  print_message_1_arg;
 	char * *result_3;
@@ -30,24 +31,34 @@ server_1(char *host)
 	}
 #endif	/* DEBUG */
 
+  sum_1_arg = 5;
 	result_1 = sum_1(&sum_1_arg, clnt);
-	if (result_1 == (int *) NULL) {
+	if (result_1 == (int *) NULL || (*result_1) != 10) {
 		clnt_perror (clnt, "call failed");
 	}
+	print_message_1_arg.code = 200;
+	print_message_1_arg.message = malloc(sizeof(50));
+	strcpy(print_message_1_arg.message, "Hello World !");
 	result_2 = print_message_1(&print_message_1_arg, clnt);
 	if (result_2 == (int *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
+  concat_1_arg.first = malloc(sizeof(1));
+  concat_1_arg.second = malloc(sizeof(1));
+	strcpy(concat_1_arg.first, "1");
+  strcpy(concat_1_arg.second, "2");
 	result_3 = concat_1(&concat_1_arg, clnt);
 	if (result_3 == (char **) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
+	increment_1_arg = malloc(sizeof(char));
 	result_4 = increment_1((void*)&increment_1_arg, clnt);
-	if (result_4 == (int *) NULL) {
+	if (result_4 == (int *) NULL || (*result_4) != 1) {
 		clnt_perror (clnt, "call failed");
 	}
+  get_1_arg = malloc(sizeof(char));
 	result_5 = get_1((void*)&get_1_arg, clnt);
-	if (result_5 == (int *) NULL) {
+	if (result_5 == (int *) NULL || (*result_5) != 1) {
 		clnt_perror (clnt, "call failed");
 	}
 #ifndef	DEBUG

@@ -13,7 +13,7 @@ sum_1_svc(int *argp, struct svc_req *rqstp)
 {
 	static int  result;
 
-	result *= 2;
+	result = 2 * (*argp);
 
 	return &result;
 }
