@@ -12,16 +12,16 @@ BIN = bin
 all: $(BIN)/ricard_agrawala
 
 run: $(BIN)/ricard_agrawala
-	$(RUN) -np 3 $<
+	$(RUN) -np 5 $<
 
 $(BIN)/ricard_agrawala: $(OBJ)/ricard_agrawala.o $(OBJ)/mpi_server.o | $(BIN)
-	$(CC) $(CFLAGS) -o $@  $(OBJ)/ricard_agrawala.o $(OBJ)/mpi_server.o -I$(INC) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@  $(OBJ)/ricard_agrawala.o $(OBJ)/mpi_server.o -I $(INC) $(LDFLAGS)
 
 $(OBJ)/mpi_server.o: $(SRC)/mpi_server.c | $(OBJ)
-	$(CC) -c $(CFLAGS) -o $@ $< -I$(INC) $(LDFLAGS)
+	$(CC) -c $(CFLAGS) -o $@ $< -I $(INC) $(LDFLAGS)
 
 $(OBJ)/ricard_agrawala.o: $(SRC)/ricard_agrawala.c | $(OBJ)
-	$(CC) -c $(CFLAGS) -o $@ $< -I$(INC) $(LDFLAGS)
+	$(CC) -c $(CFLAGS) -o $@ $< -I $(INC) $(LDFLAGS)
 
 $(SRC) $(INC) $(LIB) $(OBJ) $(BIN):
 	mkdir $@
@@ -32,9 +32,9 @@ README.txt:
 	@echo "=========================================================" >> $@
 	@echo ""                                                          >> $@
 	@echo "-- ---------------------- Etudiants ---------------------" >> $@
-	@echo "-- NOM          : METIN"                                   >> $@
-	@echo "-- PRENOM       : Hakan"                                   >> $@
-	@echo "-- NO ETUDIANT  : 2900121"                                 >> $@
+	@echo "-- NOM          : PITTON"                                  >> $@
+	@echo "-- PRENOM       : Olivier"                                 >> $@
+	@echo "-- NO ETUDIANT  : 2800439"                                 >> $@
 	@echo ""                                                          >> $@
 	@echo "-- NOM          : "                                        >> $@
 	@echo "-- PRENOM       : "                                        >> $@
