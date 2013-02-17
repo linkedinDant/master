@@ -1,12 +1,12 @@
-DROP DATABASE IF EXISTS tme_ntw;
-CREATE DATABASE IF NOT EXISTS tme_ntw;
+DROP DATABASE IF EXISTS tme_ntw_dirty;
+CREATE DATABASE IF NOT EXISTS tme_ntw_dirty;
 
-USE tme_ntw;
+USE tme_ntw_dirty;
 
 CREATE TABLE history (
-	id int primary key auto_increment,
+	id bigint primary key auto_increment,
 	log TEXT,
-	published timestamp 
+	published datetime 
 )ENGINE=MyISAM;
 
 CREATE TABLE users (
@@ -15,25 +15,29 @@ CREATE TABLE users (
 	password varchar(50)
 )ENGINE=MyISAM;
 
-CREATE TABLE french_area (
-	id int primary key,
-	area varchar(50)
-)ENGINE=MyISAM;
-
 CREATE TABLE broker (
 	id int primary key auto_increment,
 	name varchar(50),
 	bank varchar(30)
 )ENGINE=MyISAM;
 
-CREATE TABLE transaction (
+
+CREATE TABLE depository (
+	id tinyint primary key auto_increment,
+	name varchar(30),
+	bic varchar(11)
+)ENGINE=MyISAM;
+
+
+CREATE TABLE countries (
 	id int primary key auto_increment,
+	name varchar(255)
+)ENGINE=MyISAM;
+
+CREATE TABLE transactions (
+	id bigint primary key auto_increment,
 	id_user int,
 	id_broker int,
 	price double,
-	realised timestamp,
-	INDEX(id_user),
-	INDEX(id_broker),
-	CONSTRAINT FOREIGN KEY (id_user) REFERENCES users(id) ON UPDATE CASCADE ON DELETE RESTRICT,
-	CONSTRAINT FOREIGN KEY (id_broker) REFERENCES broker(id) ON UPDATE CASCADE ON DELETE RESTRICT
-)ENGINE=MyISAM; 
+	realised datetime
+)ENGINE=MyISAM;
