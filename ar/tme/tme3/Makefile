@@ -1,26 +1,40 @@
 CC = mpicc
 RUN = mpirun
 CFLAGS = -Wall -Wextra
-LDFLAGS = -lpthread
+LDFLAGS =
 
 SRC = src
 OBJ = obj
 LIB = lib
 INC = include
 BIN = bin
+NAME=arbre_mpi
+ECHO=echo
 
-all: $(BIN)/ricard_agrawala
+all: clean $(BIN)/$(NAME) $(BIN)/$(ECHO)
 
-run: $(BIN)/ricard_agrawala
-	$(RUN) -np 5 $<
+run: run1 run2
 
-$(BIN)/ricard_agrawala: $(OBJ)/ricard_agrawala.o $(OBJ)/mpi_server.o | $(BIN)
-	$(CC) $(CFLAGS) -o $@  $(OBJ)/ricard_agrawala.o $(OBJ)/mpi_server.o -I $(INC) $(LDFLAGS)
+exercice1: $(BIN)/$(NAME)
 
-$(OBJ)/mpi_server.o: $(SRC)/mpi_server.c | $(OBJ)
+exercice2 : $(BIN)/$(ECHO)
+
+run1: $(BIN)/$(NAME)
+	$(RUN) -np 7 $<
+	
+run2: $(BIN)/$(ECHO)
+	$(RUN) -np 7 $<
+
+$(BIN)/$(NAME): $(OBJ)/$(NAME).o | $(BIN)
+	$(CC) $(CFLAGS) -o $@  $(OBJ)/$(NAME).o -I $(INC) $(LDFLAGS)
+
+$(OBJ)/$(NAME).o: $(SRC)/$(NAME).c | $(OBJ)
 	$(CC) -c $(CFLAGS) -o $@ $< -I $(INC) $(LDFLAGS)
 
-$(OBJ)/ricard_agrawala.o: $(SRC)/ricard_agrawala.c | $(OBJ)
+$(BIN)/$(ECHO): $(OBJ)/$(ECHO).o | $(BIN)
+	$(CC) $(CFLAGS) -o $@  $(OBJ)/$(ECHO).o -I $(INC) $(LDFLAGS)
+	
+$(OBJ)/$(ECHO).o: $(SRC)/$(ECHO).c | $(OBJ)
 	$(CC) -c $(CFLAGS) -o $@ $< -I $(INC) $(LDFLAGS)
 
 $(SRC) $(INC) $(LIB) $(OBJ) $(BIN):
