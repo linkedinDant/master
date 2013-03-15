@@ -1,21 +1,31 @@
 CC = mpicc
 RUN = mpirun
 CFLAGS = -Wall -Wextra
-LDFLAGS = -lpthread
+LDFLAGS =
 
 SRC = src
 OBJ = obj
 LIB = lib
 INC = include
 BIN = bin
+NAME=phase
 
-all: $(BIN)/phase
+all: clean $(BIN)/$(NAME)
 
-run: $(BIN)/phase
+run: run1
+
+exercice1: $(BIN)/$(NAME)
+
+
+run1: $(BIN)/$(NAME)
 	$(RUN) -np 7 $<
+	
+$(BIN)/$(NAME): $(OBJ)/$(NAME).o | $(BIN)
+	$(CC) $(CFLAGS) -o $@  $(OBJ)/$(NAME).o -I $(INC) $(LDFLAGS)
 
-$(BIN)/phase: $(SRC)/phase.c| $(BIN)
-	$(CC) $(CFLAGS) -o $@ $< -I$(INC) $(LDFLAGS)
+$(OBJ)/$(NAME).o: $(SRC)/$(NAME).c | $(OBJ)
+	$(CC) -c $(CFLAGS) -o $@ $< -I $(INC) $(LDFLAGS)
+
 
 $(SRC) $(INC) $(LIB) $(OBJ) $(BIN):
 	mkdir $@
