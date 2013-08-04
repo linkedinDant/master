@@ -6,8 +6,8 @@ export FREETYPE_VERSION=2.5.0
 export INSTALL_ROOT_DIR=test_rep
 cd ~
 echo "Installation des paquets debian"
-sudo apt-get install gcc g++ build-essential ccache openjdk-7-jdk zip tar unzip mercurial
-sudo apt-get install libxrender-dev libxtst-dev libX11-dev libxext-dev libxrender1
+sudo apt-get install -y gcc g++ build-essential ccache openjdk-7-jdk zip tar unzip mercurial
+sudo apt-get install -y libxrender-dev libxtst-dev libX11-dev libxext-dev libxrender1
 mkdir -p ${INSTALL_ROOT_DIR}/lib/build
 cd ${INSTALL_ROOT_DIR}
 hg clone http://hg.openjdk.java.net/jdk8/jdk8
