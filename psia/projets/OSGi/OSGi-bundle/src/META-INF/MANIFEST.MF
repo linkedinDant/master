@@ -1,0 +1,2 @@
+Bundle-Activator: test.Test
+Manifest-Version: 1.0
