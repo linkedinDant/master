@@ -8,6 +8,7 @@ public class Test implements Activator {
 	@Override
 	public void start(Framework f) {
 		System.out.println("Je démarre !");
+		new SubTest();
 	}
 
 	@Override
