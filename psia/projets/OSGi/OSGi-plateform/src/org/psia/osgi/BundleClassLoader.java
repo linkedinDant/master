@@ -63,4 +63,10 @@ public class BundleClassLoader extends URLClassLoader {
 		return null;
 	}
 
+	@Override
+	public void close() throws IOException {
+		file.close();
+		super.close();
+	}
+
 }
