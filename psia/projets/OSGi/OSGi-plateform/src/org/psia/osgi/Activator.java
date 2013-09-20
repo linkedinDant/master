@@ -2,8 +2,8 @@ package org.psia.osgi;
 
 public interface Activator {
 
-	void start(Framework f);
+	void start(BundleContext context);
 	
-	void stop(Framework f);
+	void stop(BundleContext context);
 	
 }

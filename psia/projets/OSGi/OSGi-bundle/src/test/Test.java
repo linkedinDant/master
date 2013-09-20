@@ -1,19 +1,19 @@
 package test;
 
 import org.psia.osgi.Activator;
-import org.psia.osgi.Framework;
+import org.psia.osgi.BundleContext;
 
 public class Test implements Activator {
 
 	@Override
-	public void start(Framework f) {
-		System.out.println("Je démarre !");
+	public void start(BundleContext f) {
+		System.out.println("Je suis le bundle " + f.getId() + " et je démarre !");
 		new SubTest();
 	}
 
 	@Override
-	public void stop(Framework f) {
-		System.out.println("Je m'arrête !");
+	public void stop(BundleContext f) {
+		System.out.println("Je suis le bundle " + f.getId() + " et je m'arrête !");
 	}
 
 }

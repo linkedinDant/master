@@ -15,9 +15,10 @@ public class FrameworkTest {
 		Framework f = new Framework();
 		Bundle bundle = f.install(url);
 		bundle.resolve();
-		assertEquals(bundle.getBundleId(), 1);
-		assertEquals(bundle.framework(), f);
-		assertEquals(bundle.url(), url);
+		BundleContext context = bundle.getContext();
+		assertEquals(context.getId(), 1);
+		assertEquals(context.getFramework(), f);
+		assertEquals(context.getUrl(), url);
 		assertEquals(f.get(1), bundle);
 		f.close();
 	}
