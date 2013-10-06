@@ -1,0 +1,25 @@
+Exercice 1
+
+Question 3°) 
+
+Le script start-all.sh permet de démarrer tous les démons Hadoop, et lance HDFS et MapReduce. Ce script doit être lancé sur le master node.
+
+Le script stop-all.sh permet d'arrêter proprement tous les démons Hadoop. Ce script doit être lancé sur le master node.
+
+Question 5°)
+
+Oui.
+
+Exercice 2
+
+Question 4°)
+
+La clé d'entrée du mapper est de type java.lang.Object
+La valeur d'entrée du mapper est de type Text (équivalent de java.lang.String pour Hadoop)
+La clé de sortie du mapper est de type Text (équivalent de java.lang.String pour Hadoop)
+La valeur de sortie du mapper est de type IntWritable (équivalent de java.lang.Integer pour Hadoop)
+
+La clé du reducer est de type Text (équivalent de java.lang.String pour Hadoop)
+La valeur du reducer est de type Iterable<IntWritable>, un ensemble de valeurs envoyées par les mappers durant le MapReduce
+La clé de sortie du reducer est de type Text (équivalent de java.lang.String pour Hadoop)
+La valeur de sortie du reducer est de type IntWritable (équivalent de java.lang.Integer pour Hadoop)
