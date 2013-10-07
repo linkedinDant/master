@@ -1,6 +1,6 @@
 *.o
 *.so
-.eclipse
+.classpath
 .project
 ./settings
 psia/tp/hadoop/
