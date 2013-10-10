@@ -34,10 +34,6 @@ Les deux robots situés en dehors du milieu de l'anneau, donc les voisins des ro
 \paragraph{}
 
 L'ordonnancement est juste et le système est semi-synchrone. La phase est probabiliste et admet donc le tirage de nombres aléatoires. Ainsi, lors de l'échange de nombres entre les deux robots, nous sommes assurés que ceux-ci recevront la valeur de leur voisin respectif.
-\newline
-Cet événement a une probabilité de un, tel que défini dans l'énoncé. Ainsi, puisque nous avons la possibilité de communiquer de manière semi-synchrone, et non asynchrone, et que les robots sont réveillés régulièrement de manière juste par l'ordonnanceur, nous sommes assurés que l'algorithme a une probabilité de un de créer une tour.
-\newline
-Bien qu'il s'agisse d'un événement probabiliste, et non déterministe, la probabilité de un nous est donnée par TODO : Algo Las Vegas vu en AR
 
 \paragraph{}\fbox{\begin{minipage}{1\textwidth}\textbf{Question 4} \textit{Given a node u, if atu < btu and (atu diff btu diff S/2), then there exists an orientation of O-Grid such that u = (atu, btu).}
 \end{minipage}}
