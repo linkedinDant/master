@@ -5,3 +5,6 @@
 ./settings
 psia/tp/hadoop/
 loremIpsum*
+*.class
+*.aux
+*.log
