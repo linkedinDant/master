@@ -2,56 +2,77 @@
 \usepackage[utf8]{inputenc}
 \usepackage[francais]{babel}
 \usepackage[top=4cm, bottom=4cm, left=2cm, right=2cm]{geometry}
+\usepackage{alltt}
+\usepackage{graphicx}
 
 \title{\textbf{Projet d'Algorithmique Réparti Avancé}}
-\author{Coriat Florent et Pitton Olivier}
+\author{}
 \date{29 octobre 2013}
 
 \begin{document}
 \maketitle
 \newpage
 
-\paragraph{}\fbox{\begin{minipage}{1\textwidth}\textbf{Question 1} \textit{Draw a picture showing a Z-configuration on a square O6Grid of side 7. By convenience, design your picture using a grid representation (see for instance Figures 2 and 3).}
+\paragraph{}\fbox{\begin{minipage}{1\textwidth}\textbf{Question 1} \textit{Draw a picture showing a Z-configuration on a square O-Grid of side 7. By convenience, design your picture using a grid representation (see for instance Figures 2 and 3).}
 \end{minipage}}
 \paragraph{}
-TODO : Mettre un dessin de la forme suivante :
-\\-o--
-\\-oo-
-\\--o-
+
+\begin{figure}
+   \centering
+   \includegraphics[scale=0.6]{images/question_1.png}
+   \caption{Une Z-Configuration sur une O-Grid de côté de taille 7}
+\end{figure}
 
 \paragraph{}\fbox{\begin{minipage}{1\textwidth}\textbf{Question 2} \textit{Give an algorithm for Phase Tower.}
 \end{minipage}}
 \paragraph{}
-Les deux robots situés au milieu de l'anneau vont tirer, dans leur programme, un nombre aléatoire. Le robot obtenant le nombre le plus petit se déplace sur le noeud de son voisin. Respectivement, le robot tirant le plus grand nombre attend que son voisin au milieu de l'anneau viennent sur son noeud pour former la tour.
-\paragraph{}
-Les deux robots situés en dehors du milieu de l'anneau, donc les voisins des robots formant la tour, se bloquent en attendant un des deux événements suivants :
-\begin{enumerate}
- \item Le robot situé au milieu de l'anneau se déplace. Cela implique qu'il a tiré le nombre le plus petit et se dirige sur son voisin pour former la tour ;
- \item Un nouveau voisin apparait sur le même noeud que le voisin actuel, formant ainsi une tour.
-\end{enumerate}
+Les deux robots situés au milieu de l'anneau vont tirer, dans leur programme, un nombre aléatoire. Si un robot tire un nombre positif, il se déplace sur la case de son voisin. Sinon il reste à sa place.
 \paragraph{}\fbox{\begin{minipage}{1\textwidth}\textbf{Question 3} \textit{Prove that the algorithm provided in Question 2 creates a tower with probability 1.}
 \end{minipage}}
 \paragraph{}
+Soit deux robots a et b. Il y a quatre mouvements possibles :
+\begin{enumerate}
+ \item a $\leftarrow$ b ;
+ \item a $\rightarrow$ b ;
+ \item a $\leftrightarrow$ b ;
+ \item a et b ne se déplacent pas.
+\end{enumerate}
 
-L'ordonnancement est juste et le système est semi-synchrone. La phase est probabiliste et admet donc le tirage de nombres aléatoires. Ainsi, lors de l'échange de nombres entre les deux robots, nous sommes assurés que ceux-ci recevront la valeur de leur voisin respectif.
-\newline
-Cet événement a une probabilité de un, tel que défini dans l'énoncé. Ainsi, puisque nous avons la possibilité de communiquer de manière semi-synchrone, et non asynchrone, et que les robots sont réveillés régulièrement de manière juste par l'ordonnanceur, nous sommes assurés que l'algorithme a une probabilité de un de créer une tour.
-\newline
-Bien qu'il s'agisse d'un événement probabiliste, et non déterministe, la probabilité de un nous est donnée par TODO : Algo Las Vegas vu en AR
+Soit n le nombre de mouvements à effectuer pour obtenir une tour. $\lim (\frac{1}{2})^n = 0$. 
+La limite est convergente et tend vers 0, donc la probabilité d'obtenir une tour est de un.
 
-\paragraph{}\fbox{\begin{minipage}{1\textwidth}\textbf{Question 4} \textit{Given a node u, if atu < btu and (atu diff btu diff S/2), then there exists an orientation of O-Grid such that u = (atu, btu).}
+\paragraph{}\fbox{\begin{minipage}{1\textwidth}\textbf{Question 4} \textit{
+Show that given a node u, if $\alpha_{tu} < \beta_{tu}$ and ($\alpha_{tu} \ne 0 and \alpha_{tu} \ne \beta_{tu} \ne \frac{S}{2}$), then there exists an orientation of O-Grid such that $u = (\alpha_{tu}, \beta_{tu})$.
+}
 \end{minipage}}
 \paragraph{}
 
-% Answer here
+Aucun robot ne peut être situé à une distance de 3 sur le middle ring ou sur la middle chain car $\alpha_{tu} \ne \frac{S}{2}$.
+$\alpha_{tu} \ne 0$ car il est alors impossible de déterminer l'axe des x, respectivement y.
+u ne peut pas être sur une diagonale, formant ainsi un carré car $\alpha_{tu} \ne \beta_{tu}$.
+Il reste donc deux possibilités :
+\begin{enumerate}
+ \item u est plus proche de la chaîne que de l'anneau ;
+ \item u est plus proche de l'anneau que de la chaîne.
+\end{enumerate}
 
+On oriente donc l'axe en fonction de u, sans prendre en compte les coordonnées négatives lors de la création de l'axe. 
+\\Sur un repère orthonormé, si u était à la position (-1, 2), alors on change l'orientation des axes pour s'assurer que u = (1,2). Le sens des axes est défini de telle manière que u a des coordonnées x et y strictement possitives.
 
 \paragraph{}\fbox{\begin{minipage}{1\textwidth}\textbf{Question 5} \textit{Give a formal algorithm performing Phase 1.}
 \end{minipage}}
 \paragraph{}
 
-% Answer here
-
+%% Il me manque la photo prise par Christophe / Vincent pour compléter cette partie la.
+\begin{alltt}
+Let \(S^o\) be the coordinate system built over \(R_t*\)
+Let (x,y) be my current coordinates over \(S^o\)\\
+if(x \(\ge\) 0 and y \(\le\) 0) then
+  if(x + 1 \(\le x_*\)) then
+    mvto(x + 1, y)
+  else
+    mvto(x, y + 1)
+\end{alltt}
 
 \paragraph{}\fbox{\begin{minipage}{1\textwidth}\textbf{Question 6} \textit{Show that the three above conditions together require S >= 7.}
 \end{minipage}}
