@@ -12,9 +12,13 @@ public class Init implements Closeable {
   private final KVStore store;
 
   public static void main(String args[]) {
-    try(Init a = new Init(args)) {
-      new ExerciceFactory().createM2(a.store).populate().go().close();
-    }  catch (Exception e) {
+    try (Init a = new Init(args)) {
+      Exercice populate = new ExerciceFactory().createM2(a.store).populate();
+      if (populate.isPopulate() == false) {
+        populate.go();
+      }
+      populate.close();
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

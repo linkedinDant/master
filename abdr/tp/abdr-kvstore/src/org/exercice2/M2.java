@@ -15,7 +15,7 @@ public class M2 extends AbstractExercice {
   private List<Key> keys;
 
   public M2(KVStore store) {
-    super(store);
+    super(store, false);
   }
 
   @Override
@@ -25,33 +25,29 @@ public class M2 extends AbstractExercice {
       keys.add(Key.createKey("C1", "P" + i));
     }
     if (isPopulate()) {
-      for (int i = 0; i < 10; i++) {
-        store.put(keys.get(i), Value.createValue("0".getBytes()));
+      System.out.println("Réinitialisation des données...");
+      Value value = Value.createValue("0".getBytes());
+      for (int i = 0; i < 10; i++) {        
+        store.put(keys.get(i), value);
       }
+    }
+    System.out.println("Avant les transactions");
+    for (int i = 0; i < 5; i++) {
+      System.out.println(new String(store.get(keys.get(i)).getValue().getValue()));
     }
     return super.populate();
   }
 
   @Override
   public Exercice go() throws Exception {
-    int max = 0;
+    System.out.println("Démarrage des transactions");
     for (int i = 0; i < 1000; i++) {
-      max = max(max);
-      new Transaction(store).commit(max, keys);
+      new Transaction(store).commit(keys);
     }
+    System.out.println("Fin des transactions");
     for (int i = 0; i < 5; i++) {
       System.out.println(new String(store.get(keys.get(i)).getValue().getValue()));
     }
     return this;
   }
-
-  private int max(int max) {
-    for (int i = 0; i < 5; i++) {
-      int tmpMax = Integer.parseInt(new String(store.get(keys.get(0)).getValue().getValue()));
-      if (tmpMax > max)
-        max = tmpMax;
-    }
-    return max + 1;
-  }
-
 }
